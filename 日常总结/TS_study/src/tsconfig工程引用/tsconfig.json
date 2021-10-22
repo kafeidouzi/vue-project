@@ -1,0 +1,11 @@
+//src为一个大工程，其中分为三个小工程，分别配置构建
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module":"CommonJS",
+    "strict": true,
+    "composite": true,  //工程可以用
+    "declaration": true,  //给工程生成声明文件
+    "esModuleInterop":true
+  }
+}

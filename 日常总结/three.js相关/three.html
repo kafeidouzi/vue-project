@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+		</style>
+	</head>
+	<body>
+		<script src="./three.js"></script>
+		<script>
+			//three.js的显示需要三要素：场景，相机，渲染器
+			//场景
+			var scene = new THREE.Scene();
+			//相机参数：（视野角度，长宽比，近截面，远截面）
+			// 视野角度:无论什么时候显示器上显示的场景范围
+			// 长宽比：物体的宽高比
+			// 近截面，远截面 ：物体的某些部分比摄像机的远截面远或比近截面近，该部分将不会被渲染
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			// 渲染器   创建一个渲染器的实例
+			var renderer = new THREE.WebGLRenderer();
+			//确定渲染器的尺寸   ，如果要以较低分辨率来渲染，可以再调用setSize时，将updateStyle（第三个参数）设为false
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			//将renderer的dom元素添加到我们的html文档中
+			document.body.appendChild( renderer.domElement );
+
+			//创建一个立方体对象，该对象包含立方体的所有顶点和面
+			var geometry = new THREE.BoxGeometry();
+			// 确认立方体的材质，
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			//网格（mesh），网格包含一个几何体和作用在几何体上的材质。我们可以把网格对象放到我们的场景中，并让场景中自由移动
+			var cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+
+			camera.position.z = 5;
+
+			var animate = function () {
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+			};
+
+			animate();
+		</script>
+	</body>
+</html>
